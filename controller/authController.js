@@ -36,7 +36,7 @@ const UserRegister = async (req, res) => {
         name,
         email,
         password: passHash,
-        role : 'user'
+        role: "user",
       },
     });
     return res.json({
@@ -67,6 +67,16 @@ const login = async (req, res) => {
     name: emailExist.name,
     email: emailExist.email,
   };
+
+  // const token = jwt.sign(payload, "secretkey");
+  // res.cookie("jwt", token, {
+  //   httpOnly: true,
+  //   maxAge: 24 * 60 * 60 * 1000, //1day
+  // });
+
+  // res.json({
+  //   ms: success,
+  // });
 
   jwt.sign(payload, "secretkey", { expiresIn: 20 }, (err, token) => {
     if (err) throw err;
